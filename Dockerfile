@@ -27,7 +27,7 @@ WORKDIR /var/www/html
 # Copy Laravel files
 COPY . .
 
-# Copy built frontend assets
+# Copy built frontend assets from Node stage
 COPY --from=node-builder /app/public/build ./public/build
 
 # Create storage directories and set permissions
@@ -41,6 +41,7 @@ RUN mkdir -p storage/framework/cache/data \
 RUN composer install --no-dev --optimize-autoloader
 
 # Laravel optimizations
+# Clear view cache instead of caching to avoid missing paths
 RUN php artisan config:cache \
  && php artisan route:cache \
  && php artisan view:clear
@@ -50,4 +51,3 @@ EXPOSE 10000
 
 # Start Laravel server
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
---git 
