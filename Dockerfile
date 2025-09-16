@@ -30,9 +30,12 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
 # Copy SQLite DB to writable location
-COPY database/database.sqlite /tmp/database.sqlite
-RUN chown www-data:www-data /tmp/database.sqlite \
+RUN mkdir -p /tmp
+COPY ./database/database.sqlite /tmp/database.sqlite
+RUN touch /tmp/database.sqlite \
+ && chown www-data:www-data /tmp/database.sqlite \
  && chmod 664 /tmp/database.sqlite
+
 
 # Create storage dirs and set permissions
 RUN mkdir -p storage/framework/cache/data \
