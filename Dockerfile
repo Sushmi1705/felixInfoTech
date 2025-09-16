@@ -35,11 +35,11 @@ RUN mkdir -p storage/framework/cache/data \
  && chown -R www-data:www-data storage bootstrap/cache \
  && chmod -R 775 storage bootstrap/cache
 
-# ✅ Ensure SQLite database file always exists
-RUN mkdir -p /tmp \
- && touch /tmp/database.sqlite \
- && chown www-data:www-data /tmp/database.sqlite \
- && chmod 664 /tmp/database.sqlite
+# ✅ Ensure SQLite DB in storage is created and writable
+RUN touch /var/www/html/storage/database.sqlite \
+ && chown www-data:www-data /var/www/html/storage/database.sqlite \
+ && chmod 664 /var/www/html/storage/database.sqlite
+
 
 # Laravel optimizations
 RUN php artisan config:clear \
