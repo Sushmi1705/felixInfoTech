@@ -22,23 +22,32 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www/html
 
-# Copy PHP/Laravel files
+# Copy Laravel files
 COPY . .
 
 # Copy built frontend assets
 COPY --from=node-builder /app/public/build ./public/build
 
+# Create storage directories and set permissions
+RUN mkdir -p storage/framework/cache/data \
+ && mkdir -p storage/framework/views \
+ && mkdir -p storage/logs \
+ && chown -R www-data:www-data storage bootstrap/cache \
+ && chmod -R 775 storage bootstrap/cache
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
 # Laravel optimizations
-# Skip view:cache to avoid "View path not found" error on first deploy
 RUN php artisan config:cache \
- && php artisan route:cache
+ && php artisan route:cache \
+ && php artisan view:clear
 
-# Expose port and start Laravel server
+# Expose port
 EXPOSE 10000
+
+# Start Laravel server
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
+--git 
