@@ -25,6 +25,9 @@ COPY . .
 # Copy built frontend assets
 COPY --from=node-builder /app/public/build ./public/build
 
+# Copy SQLite DB to /tmp (writable)
+COPY database/database.sqlite /tmp/database.sqlite
+
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
@@ -37,8 +40,8 @@ RUN mkdir -p storage/framework/cache/data \
  && chmod -R 775 storage bootstrap/cache
 
 # Laravel optimizations
-RUN php artisan config:cache \
- && php artisan route:cache \
+RUN php artisan config:clear \
+ && php artisan route:clear \
  && php artisan view:clear
 
 # Configure Nginx
@@ -47,5 +50,5 @@ COPY ./nginx/default.conf /etc/nginx/sites-available/default
 # Expose port 80
 EXPOSE 80
 
-# Start Nginx + PHP-FPM
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# Start script: copy SQLite to /tmp every time container starts
+CMD ["sh", "-c", "cp /var/www/html/database/database.sqlite /tmp/database.sqlite && php-fpm -D && nginx -g 'daemon off;'"]
