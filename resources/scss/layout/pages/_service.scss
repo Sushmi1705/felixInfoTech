@@ -1,0 +1,214 @@
+/* ICT Solutions Page Styles */
+.ict-page {
+  .ict-section {
+    padding: 60px 30px;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    border-left: 6px solid #0066b6; /* Felix Orange by default */
+    position: relative;
+    transition: all .3s ease;
+
+    h2 {
+      font-family: proxima-nova,sans-serif !important;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #222;
+      position: relative;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(243, 128, 33, 0.15);
+      border-left-color: #00acee; /* Switch to Felix Blue on hover */
+    }
+
+    /* Number badge */
+    // &::before {
+    //   content: attr(id);
+    //   position: absolute;
+    //   top: 15px;
+    //   right: 20px;
+    //   font-size: 12px;
+    //   font-weight: 600;
+    //   color: #fff;
+    //   background: #8cc737;
+    //   padding: 6px 10px;
+    //   border-radius: 20px;
+    // }
+  }
+
+  .ict-section:nth-child(odd) {
+    background: linear-gradient(135deg, rgba(243,128,33,0.05), rgba(0,172,238,0.05));
+  }
+
+  .ict-section:nth-child(even) {
+    background: linear-gradient(135deg, rgba(140,199,55,0.05), rgba(255,202,5,0.05));
+  }
+}
+/* Software Solutions Page - Felix Unified Style */
+.software-page {
+
+  .py-6{
+    padding-top: 6rem !important;
+  }
+  .software-section {
+    padding: 60px 30px;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    border-left: 6px solid #8cc737; /* Felix Green */
+    position: relative;
+    transition: all .3s ease;
+
+    h2 {
+      font-family: proxima-nova,sans-serif !important;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    b {
+      color: #000;
+      font-weight: 600;
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(140, 199, 55, 0.15);
+      border-left-color: #ffca05; /* Felix Yellow on hover */
+    }
+
+    /* Section Number Badge */
+    // &::before {
+    //   content: attr(id);
+    //   position: absolute;
+    //   top: 15px;
+    //   right: 20px;
+    //   font-size: 12px;
+    //   font-weight: 600;
+    //   color: #fff;
+    //   background: #00acee; /* Felix Blue badge */
+    //   padding: 6px 10px;
+    //   border-radius: 20px;
+    // }
+  }
+
+  .software-section:nth-child(odd) {
+    background: linear-gradient(135deg, rgba(243,128,33,0.05), rgba(0,172,238,0.05));
+  }
+
+  .software-section:nth-child(even) {
+    background: linear-gradient(135deg, rgba(140,199,55,0.05), rgba(255,202,5,0.05));
+  }
+}
+
+/* Cloud & Data Centre Page - Felix Branded SCSS */
+.cloud-page {
+  counter-reset: cloud-sections;
+  padding: 60px 20px;
+
+  h1 {
+    font-family: proxima-nova,sans-serif !important;
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #222;
+  }
+
+  /* target the existing sections (no need to add extra classes) */
+  section[id^="tab"] {
+    counter-increment: cloud-sections;
+    padding: 60px 30px;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    border-left: 6px solid #0066b6; /* Felix Orange */
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    /* numeric badge (uses counter) */
+    // &::before {
+    //   content: counter(cloud-sections);
+    //   position: absolute;
+    //   top: 15px;
+    //   right: 20px;
+    //   font-size: 12px;
+    //   font-weight: 600;
+    //   color: #fff;
+    //   background: #8cc737; /* Felix Green */
+    //   padding: 6px 10px;
+    //   border-radius: 20px;
+    //   line-height: 1;
+    // }
+
+    h2 {
+      font-family: proxima-nova,sans-serif !important;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #222;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      margin: 0 0 12px 18px;
+      li {
+        margin-bottom: 6px;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(243, 128, 33, 0.15);
+      border-left-color: #00acee; /* blue on hover */
+    }
+  }
+
+  /* alternating subtle background rhythm */
+  section[id^="tab"]:nth-of-type(odd) {
+    background: linear-gradient(135deg, rgba(243,128,33,0.05), rgba(0,172,238,0.05));
+  }
+  section[id^="tab"]:nth-of-type(even) {
+    background: linear-gradient(135deg, rgba(140,199,55,0.05), rgba(255,202,5,0.05));
+  }
+
+  /* responsive */
+  @media (max-width: 576px) {
+    padding: 40px 15px;
+
+    h1 {
+      font-size: 28px;
+    }
+
+    section[id^="tab"] {
+      padding: 30px 18px;
+    }
+  }
+}
