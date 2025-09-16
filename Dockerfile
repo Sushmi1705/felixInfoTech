@@ -25,8 +25,12 @@ COPY . .
 # Copy built frontend assets
 COPY --from=node-builder /app/public/build ./public/build
 
-# Copy SQLite DB to /tmp (writable)
+# Copy SQLite DB to /tmp (writable location)
 COPY database/database.sqlite /tmp/database.sqlite
+
+# Fix permissions so PHP-FPM (www-data) can write to it
+RUN chown www-data:www-data /tmp/database.sqlite \
+ && chmod 664 /tmp/database.sqlite
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
