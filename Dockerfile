@@ -29,13 +29,11 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy Laravel backend files (excluding node_modules for caching)
+# Copy Laravel backend files
 COPY --chown=www-data:www-data . .
 
 # Copy built frontend assets from node-builder
 COPY --from=node-builder /app/public/build /var/www/html/public/build
-COPY --from=node-builder /app/resources/js /var/www/html/resources/js
-COPY --from=node-builder /app/resources/css /var/www/html/resources/css
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
