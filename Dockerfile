@@ -32,9 +32,12 @@ RUN composer install --no-dev --optimize-autoloader
 # Copy SQLite DB to writable location
 RUN mkdir -p /tmp
 COPY ./database/database.sqlite /tmp/database.sqlite
-RUN touch /tmp/database.sqlite \
- && chown www-data:www-data /tmp/database.sqlite \
- && chmod 664 /tmp/database.sqlite
+# Ensure SQLite DB exists in /tmp
+RUN mkdir -p /tmp \
+    && touch /tmp/database.sqlite \
+    && chown www-data:www-data /tmp/database.sqlite \
+    && chmod 664 /tmp/database.sqlite
+
 
 
 # Create storage dirs and set permissions
