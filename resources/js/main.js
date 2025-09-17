@@ -1,4 +1,6 @@
 import $ from 'jquery'
+// Import SCSS
+import '../scss/main.scss';
 
 window.jQuery = window.$ = $
 import 'magnific-popup/dist/jquery.magnific-popup';
